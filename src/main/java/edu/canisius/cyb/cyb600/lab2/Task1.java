@@ -4,6 +4,7 @@ import edu.canisius.cyb.cyb600.lab2.exceptions.NotADogException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Task1 {
 
@@ -13,11 +14,12 @@ public class Task1 {
      * @return List of Characters. Should not return null.
      */
     public List<Character> listAllCharacters(String stringToList){
-        if (stringToList == null){
-            return null;
-        }
         List<Character> characterList = new ArrayList<>();
-        for(int i=1; i<stringToList.toCharArray().length;i++){
+        if (stringToList == null){
+            return characterList;
+        }
+
+        for(int i=0; i<stringToList.toCharArray().length;i++){
             characterList.add(stringToList.toCharArray()[i]);
         }
         return characterList;
@@ -30,7 +32,13 @@ public class Task1 {
      * @return String with base surrounded by two Strings. Should not return null.
      */
     public String concatenateToFrontAndEnd(String baseString, String concat){
-        return baseString+concat;
+        if (baseString == null){
+            baseString = "";
+        }
+        if (concat == null){
+            concat = "";
+        }
+        return concat+baseString+concat;
     }
 
     /**
@@ -40,7 +48,8 @@ public class Task1 {
      * @throws NotADogException When someone is silly and doesn't put in a dog.
      */
     public void throwExceptionIfNotADog(String betterBeDog) throws NotADogException {
-        if (!betterBeDog.equals("dog")) {
+
+        if (!betterBeDog.equalsIgnoreCase("dog")) {
             throw new NotADogException("This isn't a dog.");
         }
     }
@@ -53,9 +62,12 @@ public class Task1 {
      */
     public List<String> returnsTheSameStringTenTimes(String baseString){
         List<String> arrayList = new ArrayList<>();
-        while (arrayList.size()+1 != 10){
+        if (baseString == null){
+            return arrayList;
+        }
+        while (arrayList.size() != 10){
             arrayList.add(baseString);
         }
-        return new ArrayList<>();
+        return arrayList;
     }
 }
